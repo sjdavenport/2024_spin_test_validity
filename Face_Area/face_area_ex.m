@@ -1,7 +1,7 @@
 
 %%
-path4gifti_left = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_white.surf.gii';
-spherepathloc = 'C:/Users/12SDa/neuromaps-data/atlases/fsaverage/tpl-fsaverage_den-10k_hemi-L_sphere.surf.gii';
+path4gifti_left = 'C:/Users/12SDa/davenpor/davenpor/Toolboxes/BrainStat/BrainImages/Gifti_files/tpl-fsaverage_den-10k_hemi-L_white.surf.gii';
+spherepathloc = 'C:/Users/12SDa/davenpor/davenpor/Toolboxes/BrainStat/BrainImages/Gifti_files/tpl-fsaverage_den-10k_hemi-L_sphere.surf.gii';
 
 %%
 face_areas_brain = surf_face_area( path4gifti_left );
