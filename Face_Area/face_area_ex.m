@@ -1,27 +1,26 @@
-
 %%
 path4gifti_left = 'C:/Users/12SDa/davenpor/davenpor/Toolboxes/BrainStat/BrainImages/Gifti_files/tpl-fsaverage_den-10k_hemi-L_white.surf.gii';
 spherepathloc = 'C:/Users/12SDa/davenpor/davenpor/Toolboxes/BrainStat/BrainImages/Gifti_files/tpl-fsaverage_den-10k_hemi-L_sphere.surf.gii';
 
 %%
 face_areas_brain = surf_face_area( path4gifti_left );
-face_areas_brain = face_areas_brain*(length(face_areas_brain)/sum(face_areas_brain));
+% face_areas_brain = face_areas_brain*(length(face_areas_brain)/sum(face_areas_brain));
 surfplot( path4gifti_left, face_areas_brain )
 colorbar
 surfscreen
 
 %%
 face_areas_sphere = surf_face_area( spherepathloc );
-face_areas_sphere = face_areas_sphere*(length(face_areas_sphere)/sum(face_areas_sphere));
+% face_areas_sphere = face_areas_sphere*(length(face_areas_sphere)/sum(face_areas_sphere));
+face_areas_sphere = face_areas_sphere/sum(face_areas_sphere)*sum(face_areas_brain);
 surfplot( spherepathloc, face_areas_sphere )
 spherescreen(1)
 
 %% Area ratio on the brain
 face_area_ratio = face_areas_sphere./face_areas_brain;
-surfplot( path4gifti_left, face_area_ratio)
+surfplot( path4gifti_left, face_area_ratio < 0.7)
 surfscreen
 colorbar
-caxis([-4,4])
 % colormap('jet')
 
 
@@ -39,9 +38,9 @@ for turn = [0,1]
     colormap('jet')
     title('Sphere area/Cortex Area')
     if turn == 0
-        saveim('facearearatio_front')
+        saveim('facearearatio_front', './')
     else
-        saveim('facearearatio_back')
+        saveim('facearearatio_back',  './')
     end
 end
 
@@ -55,9 +54,9 @@ for turn = [0,1]
     colormap('jet')
     saveim('faceareadiff')
     if turn == 0
-        saveim('faceareadiff_front')
+        saveim('faceareadiff_front',  './')
     else
-        saveim('faceareadiff_back')
+        saveim('faceareadiff_back',  './')
     end
 end
 
