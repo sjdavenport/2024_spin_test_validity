@@ -52,4 +52,5 @@ fill(ax, xvals, yvals, rgbColors(end,:), 'edgealpha', 0.01)
 axis off
 % Set colormap (e.g., jet)
 colormap(ax, jet);
+surfscreen
 saveim
