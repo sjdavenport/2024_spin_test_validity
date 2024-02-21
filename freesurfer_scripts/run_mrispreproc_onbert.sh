@@ -17,8 +17,8 @@ for h in lh rh ; do
       --fwhm 15 \
       --nocleanup ;
       rm -f /home/sdavenport/freesurfer_runs/mris_preproc/${h}.${meas}.ic3.mgz ;
-      pid=$(awk '/tmpdir is/ {print $NF}' /home/sdavenport/freesurfer_runs/mris_preproc/${h}.${meas}.ic${n}.mris_preproc.log | awk -F. '{print $NF}') ;
-      mv /home/sdavenport/freesurfer_runs/mris_preproc/tmp.mris_preproc.${pid} ${ROOTDIR}/OASIS/mris_preproc/${h}.${meas}.ic${n}.dir
+      pid=$(awk '/tmpdir is/ {print $NF}' /home/sdavenport/freesurfer_runs/mris_preproc/${h}.${meas}.ic3.mris_preproc.log | awk -F. '{print $NF}') ;
+      mv /home/sdavenport/freesurfer_runs/mris_preproc/tmp.mris_preproc.${pid} /home/sdavenport/freesurfer_runs/mris_preproc/${h}.${meas}.ic3.dir
 done
 done
 
