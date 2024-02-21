@@ -1,0 +1,35 @@
+#!/bin/bash
+
+export SUBJECTS_DIR=${ROOTDIR}/OASIS/DATA/
+
+for n in 3 4 5 6 7 ; do
+if [[ ${n} -eq 7 ]] ; then
+TARGET=fsaverage
+else
+TARGET=fsaverage${n}
+fi
+mkdir -p  ${ROOTDIR}/OASIS/mris_preproc
+LIST=""
+for sub in $(cat ${ROOTDIR}/OASIS/listofsubjects.csv) ; do  #listofsubjects.csv needs to contain the subject folder names i.e. OAS...
+LIST="${LIST} --s ${sub}"
+done
+for meas in area thickness w-g.pct.mgh ; do
+for h in lh rh ; do
+      ${FREESURFER_HOME}/bin/mris_preproc ${LIST} \
+      --hemi ${h} \
+      --target ${TARGET} \
+      --meas ${meas} \
+      --surfreg sphere.reg \
+      --out ${ROOTDIR}/OASIS/mris_preproc/${h}.${meas}.ic${n}.mgz \
+      --fwhm 15 \
+      --nocleanup ;
+      rm -f ${ROOTDIR}/OASIS/mris_preproc/${h}.${meas}.ic${n}.mgz ;
+      pid=$(awk '/tmpdir is/ {print $NF}' ${ROOTDIR}/OASIS/mris_preproc/${h}.${meas}.ic${n}.mris_preproc.log | awk -F. '{print $NF}') ;
+      mv ${ROOTDIR}/OASIS/mris_preproc/tmp.mris_preproc.${pid} ${ROOTDIR}/OASIS/mris_preproc/${h}.${meas}.ic${n}.dir
+done
+done
+done
+
+# interpolation is nearest neighbour
+# freesurfer contained here: /usr/pubsw/packages/freesurfer/RH4-x86_64-R530/
+# fsaverage/surf/lh.sphere is the icosahedron
