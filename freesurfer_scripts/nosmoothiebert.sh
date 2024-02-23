@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export SUBJECTS_DIR=/home/sdavenport/freesurfer_files/
+
 for n in 3 5 ; do
 TARGET=fsaverage${n}
 mkdir -p  $/home/sdavenport/freesurfer_runs/mris_preproc
@@ -7,7 +9,7 @@ LIST=""
 for sub in $(cat /home/sdavenport/freesurfer_runs/listofsubjects.csv) ; do  #listofsubjects.csv needs to contain the subject folder names i.e. OAS...
 LIST="${LIST} --s ${sub}"
 done
-for meas in area thickness; do
+for meas in testvar.curv; do
 for h in lh rh ; do
       ${FREESURFER_HOME}/bin/mris_preproc ${LIST} \
       --hemi ${h} \
