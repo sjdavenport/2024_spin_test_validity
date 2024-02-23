@@ -9,7 +9,7 @@ LIST=""
 for sub in $(cat /home/sdavenport/freesurfer_runs/listofsubjects.csv) ; do  #listofsubjects.csv needs to contain the subject folder names i.e. OAS...
 LIST="${LIST} --s ${sub}"
 done
-for meas in testvar.curv; do
+for meas in smoothnoise.curv; do
 for h in lh rh ; do
       ${FREESURFER_HOME}/bin/mris_preproc ${LIST} \
       --hemi ${h} \
