@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export SUBJECTS_DIR=/home/sdavenport/freesurfer_files/
+export SUBJECTS_DIR=/home/sdavenport/freesurfer_files
 
 for n in 3 5 ; do
 TARGET=fsaverage${n}
