@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export SUBJECTS_DIR=/home/sdavenport/freesurfer_files
+
 for n in 6 ; do
 TARGET=fsaverage${n}
 mkdir -p  $/home/sdavenport/freesurfer_runs/mris_preproc
