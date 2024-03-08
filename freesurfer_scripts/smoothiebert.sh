@@ -9,7 +9,7 @@ LIST="${LIST} --s ${sub}"
 done
 for f in 0 5 6 7 8 9 10 11 12 13 14 15; do
 for meas in thickness; do
-for h in lh rh ; do
+for h in lh; do
       ${FREESURFER_HOME}/bin/mris_preproc ${LIST} \
       --hemi ${h} \
       --target ${TARGET} \
