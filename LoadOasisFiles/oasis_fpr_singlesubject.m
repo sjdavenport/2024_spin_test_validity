@@ -30,8 +30,8 @@ for I = 1:nsims
     % srf_sphere = fs2surf(fs1_sphere_left, fs1_sphere_right);
 
     % Add data and smooth
-    X = surf_noise( srf_sphere, FWHM, 'ones' );
-    Y = surf_noise( srf_sphere, FWHM, 'ones' );
+    X = srf_noise( srf_sphere, FWHM, 'ones' );
+    Y = srf_noise( srf_sphere, FWHM, 'ones' );
 
     % Run the spin test
     [thresh, rho_store] = spintest( X, Y, srf_sphere, nperm, 0 );

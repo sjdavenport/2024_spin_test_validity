@@ -8,7 +8,7 @@ g_sphere.vertices = vertices;
 g_sphere.faces = faces;
 
 %%
-face_areas_brain = surf_face_area( g_white );
+face_areas_brain = srf_face_area( g_white );
 % face_areas_brain = face_areas_brain*(length(face_areas_brain)/sum(face_areas_brain));
 % surfplot( g_white, face_areas_brain )
 % colorbar
