@@ -21,8 +21,8 @@ for h in lh; do
       --fwhm ${f} \
       --nocleanup ;
       #rm -f /home/sdavenport/freesurfer_runs/mris_preproc/${h}.${meas}.ic${n}_fwhm${f}.mgz ;
-      pid=$(awk '/tmpdir is/ {print $NF}' /home/sdavenport/freesurfer_runs/mris_preproc/${h}.${meas}.ic${n}_fwhm${f}.mris_preproc.log | awk -F. '{print $NF}') ;
-      mv /home/sdavenport/freesurfer_runs/mris_preproc/tmp.mris_preproc.${pid} /home/sdavenport/freesurfer_runs/mris_preproc/${h}.${meas}.ic${n}_fwhm${f}.dir
+      #pid=$(awk '/tmpdir is/ {print $NF}' /home/sdavenport/freesurfer_runs/mris_preproc/${h}.${meas}.ic${n}_fwhm${f}.mris_preproc.log | awk -F. '{print $NF}') ;
+      #mv /home/sdavenport/freesurfer_runs/mris_preproc/tmp.mris_preproc.${pid} /home/sdavenport/freesurfer_runs/mris_preproc/${h}.${meas}.ic${n}_fwhm${f}.dir
 done
 done
 done
