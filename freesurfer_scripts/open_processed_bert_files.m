@@ -254,6 +254,7 @@ bert_ic6_fwhm_30_thickness = palm_miscread('/home/sdavenport/freesurfer_runs/mri
 bert_ic6_fwhm_40_thickness = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.thickness.ic6_fwhm40.dir/bert.1.mgh');
 
 save('/home/sdavenport/2024_spin_test_validity/freesurfer_scripts/bert_thickness_vars', 'bert_orig_thickness', 'bert_ic6_fwhm_0_thickness', 'bert_ic6_fwhm_40_thickness')
+
 %%
 bert_ic5_fwhm_5_thickness = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.thickness.ic5_fwhm5.dir/bert.1.mgh');
 bert_ic5_fwhm_10_thickness = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.thickness.ic5_fwhm10.dir/bert.1.mgh');
@@ -274,3 +275,14 @@ unsmoothnoise.data = data.lh;
 palm_miscwrite(unsmoothnoise)
 
 save('/home/sdavenport/2024_spin_test_validity/freesurfer_scripts/unsmoothed_data.mat', 'data');
+
+%% Save the smoothed unsmoothed data
+clear data
+a = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.unsmoothnoise.curv.ic6_fwhm10.dir/bert.1.mgh');
+data.fwhm10 = a.data;
+a = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.unsmoothnoise.curv.ic6_fwhm5.dir/bert.1.mgh');
+data.fwhm15 = a.data;
+a = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.unsmoothnoise.curv.ic6_fwhm15.dir/bert.1.mgh');
+data.fwhm5 = a.data;
+
+save('/home/sdavenport/2024_spin_test_validity/freesurfer_scripts/resampled_ints.mat', 'resampled_int3', 'resampled_int5');
