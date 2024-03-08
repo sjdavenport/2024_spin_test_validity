@@ -248,3 +248,7 @@ myresampled_data3.rh = orig_data.rh(nnindices3.rh);
 
 %%
 save('./nnindices', 'nnindices', "nnindices3")
+
+%% Read smoothed thickness
+bert_origrh_thickness = palm_miscread('/usr/pubsw/packages/freesurfer/RH4-x86_64-R530/subjects/bert/surf/rh.thickness');
+bert_ic3_thickness = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/rh.thickness.ic6_fwhm40.dir/bert.1.mgh');
