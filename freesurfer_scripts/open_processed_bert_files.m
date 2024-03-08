@@ -198,10 +198,6 @@ srfplot(srfwhite.lh, myresampled_data3.lh, 0, 0, 0)
 
 
 %%
-
-
-
-%%
 subplot(1,3,1)
 srfplot(bert_srf.lh, orig_data.lh)
 title('Original smoothed data', 'color','white')
@@ -250,5 +246,31 @@ myresampled_data3.rh = orig_data.rh(nnindices3.rh);
 save('./nnindices', 'nnindices', "nnindices3")
 
 %% Read smoothed thickness
-bert_origrh_thickness = palm_miscread('/usr/pubsw/packages/freesurfer/RH4-x86_64-R530/subjects/bert/surf/rh.thickness');
-bert_ic3_thickness = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/rh.thickness.ic6_fwhm40.dir/bert.1.mgh');
+bert_orig_thickness = palm_miscread('/usr/pubsw/packages/freesurfer/RH4-x86_64-R530/subjects/bert/surf/lh.thickness');
+
+bert_ic6_fwhm_0_thickness = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.thickness.ic6_fwhm0.dir/bert.1.mgh');
+bert_ic6_fwhm_30_thickness = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.thickness.ic6_fwhm30.dir/bert.1.mgh');
+
+bert_ic6_fwhm_40_thickness = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.thickness.ic6_fwhm40.dir/bert.1.mgh');
+
+save('/home/sdavenport/2024_spin_test_validity/freesurfer_scripts/bert_thickness_vars', 'bert_orig_thickness', 'bert_ic6_fwhm_0_thickness', 'bert_ic6_fwhm_40_thickness')
+%%
+bert_ic5_fwhm_5_thickness = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.thickness.ic5_fwhm5.dir/bert.1.mgh');
+bert_ic5_fwhm_10_thickness = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.thickness.ic5_fwhm10.dir/bert.1.mgh');
+
+%% Write unsmooth data
+bert_surf_dir = '/usr/pubsw/packages/freesurfer/RH4-x86_64-R530/subjects/bert/surf/';
+srf = fs2surf([bert_surf_dir, 'lh.sphere.reg'], [bert_surf_dir, 'rh.sphere.reg']);
+
+data = srf_noise(srf, 0);
+
+unsmoothnoise = palm_miscread('/usr/pubsw/packages/freesurfer/RH4-x86_64-R530/subjects/bert/surf/rh.thickness');
+unsmoothnoise.data = data.rh;
+unsmoothnoise.filename = '/home/sdavenport/freesurfer_files/bert/surf/rh.unsmoothnoise.curv';
+palm_miscwrite(unsmoothnoise)
+unsmoothnoise = palm_miscread('/usr/pubsw/packages/freesurfer/RH4-x86_64-R530/subjects/bert/surf/lh.thickness');
+unsmoothnoise.filename = '/home/sdavenport/freesurfer_files/bert/surf/lh.unsmoothnoise.curv';
+unsmoothnoise.data = data.lh;
+palm_miscwrite(unsmoothnoise)
+
+save('/home/sdavenport/2024_spin_test_validity/freesurfer_scripts/unsmoothed_data.mat', 'data');

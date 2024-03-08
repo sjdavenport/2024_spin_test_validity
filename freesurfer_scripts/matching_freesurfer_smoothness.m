@@ -24,3 +24,22 @@ for I = 1:length(fwhm_vals)
 end
 plot(fwhm_vals, fwhmconverts)
 
+%%
+a = load('bert_thickness_vars.mat');
+unsmoothed_data = bert_ic6_fwhm_0_thickness.data;
+smoothed_data = bert_ic6_fwhm_40_thickness.data;
+srf6sphere = loadsrf('fs6', 'sphere');
+mysmoothed_data = smooth_surface(srf6sphere.lh, unsmoothed_data, 40);
+
+%%
+subplot(1,2,1)
+srfplot(srf6sphere.lh, smoothed_data)
+subplot(1,2,2)
+srfplot(srf6sphere.lh, unsmoothed_data)
+
+%%
+bertsrf = loadsrf('bert', 'sphere.reg');
+subplot(1,2,1)
+srfplot(srf6sphere.lh, smoothed_data)
+subplot(1,2,2)
+srfplot(bertsrf.lh, a.bert_orig_thickness.data)
