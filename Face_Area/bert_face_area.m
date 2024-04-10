@@ -88,6 +88,10 @@ white_area_data = dpvread('C:\Users\12SDa\davenpor\Data\Surface\lh.white.area.dp
 white_area = white_area_data(:,5);
 sphere_area = sphere_area/sum(sphere_area)*sum(white_area);
 
+%% Plot the mesh area
+% g_white = loadsrf('bert', 'white');
+srfplot( g_white, white_area, 0)
+saveim('ex_area')
 %% Andreson's Bert DPV area ratio on the brain (not sure if this is interesting really)
 for dosqrt = [0,1]
     if dosqrt == 0
@@ -95,7 +99,7 @@ for dosqrt = [0,1]
     else
         dpv_face_area_ratio = sqrt(sphere_area)./sqrt(white_area);
     end
-    surfplot( g_white, dpv_face_area_ratio, 0)
+    srfplot( g_white, dpv_face_area_ratio, 0)
     caxis([0.5,2])
     fullscreen
     colorbar

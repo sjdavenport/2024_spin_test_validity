@@ -289,6 +289,8 @@ save('/home/sdavenport/2024_spin_test_validity/freesurfer_scripts/resampled_ints
 
 %%
 clear data
+a = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.unsmoothnoise.curv.ic6_fwhm0.mgz');
+data.fwhm0 = a.data;
 a = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.unsmoothnoise.curv.ic6_fwhm10.mgz');
 data.fwhm10 = a.data;
 a = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.unsmoothnoise.curv.ic6_fwhm15.mgz');
@@ -296,4 +298,4 @@ data.fwhm15 = a.data;
 a = palm_miscread('/home/sdavenport/freesurfer_runs/mris_preproc/lh.unsmoothnoise.curv.ic6_fwhm5.mgz');
 data.fwhm5 = a.data;
 
-save('/home/sdavenport/2024_spin_test_validity/freesurfer_scripts/resampled_ints.mat', 'smoothed_data');
+save('/home/sdavenport/2024_spin_test_validity/freesurfer_scripts/fssmoothnoise.mat', 'data');
