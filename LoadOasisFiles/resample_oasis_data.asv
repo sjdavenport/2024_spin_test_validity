@@ -1,0 +1,42 @@
+global dataloc
+datadir = [dataloc, 'Surface/Oasis_data/oasis_data_repo/'];
+sphere_type = 'fs6';
+ico_srf = loadsrf( sphere_type, 'sphere' );
+
+fileids = filesindir(datadir, '.reg');
+
+%%
+for subid = 1:1
+    subid
+    subdata = load([datadir, fileids{subid}]);
+    subid = extract_numbers(fileids{subid});
+    nnindices = resample_srf_nn( subdata.srf, ico_srf );
+    save([datadir, sphere_type, '_nnindices_subject_', num2str(subid)], 'nnindices')
+end
+
+%% Illustrate the resampling
+subdata = load([datadir, fileids{1}]);
+data = srf_noise(subdata.srf, 20);
+
+subplot(1,2,1)
+srfplot(subdata.srf.lh, data.lh)
+subplot(1,2,2)
+load([datadir, 'nnindices_subject_', num2str(1)])
+resampled_data.lh = data.lh(nnindices.lh);
+ico_srf = loadsrf( 'fs6', 'sphere' );
+srfplot(ico_srf.lh, resampled_data.lh)
+
+%%
+% nnindices = resample_srf_nn( srf6, srf4 );
+sphere_type = 'fs4';
+ico_srf = loadsrf( sphere_type, 'sphere' );]
+
+nnindices = resample_srf_nn( , ico_srf );
+
+data = srf_noise(subdata.srf, 20);
+resampled_data.lh = data.lh(nnindices.lh);
+
+subplot(1,2,1)
+srfplot(subdata.srf.lh, data.lh)
+subplot(1,2,2)
+srfplot(ico_srf.lh, resampled_data.lh)

@@ -8,27 +8,49 @@ g_sphere.vertices = vertices;
 g_sphere.faces = faces;
 
 %%
-face_areas_brain = srf_face_area( g_white );
+srf_white = loadsrf('fs5', 'white');
+srf_sphere = loadsrf('fs5', 'sphere');
+
+g_white = srf_white.lh;
+g_sphere = srf_sphere.lh;
+
+%%
+    g_white = fs2surf([datadir, data_folder, '/surf/', 'lh.white']);
+    g_sphere = fs2surf([datadir, data_folder, '/surf/', 'lh.sphere.reg']);
+
+%%
+[face_areas_brain, vertex_areas_brain] = srf_face_area( g_white );
 % face_areas_brain = face_areas_brain*(length(face_areas_brain)/sum(face_areas_brain));
-% surfplot( g_white, face_areas_brain )
+% srfplot( g_white, face_areas_brain )
 % colorbar
 % surfscreen
 
 %%
-face_areas_sphere = surf_face_area( g_sphere );
+[face_areas_sphere, vertex_areas_sphere] = srf_face_area( g_sphere );
 % face_areas_sphere = face_areas_sphere*(length(face_areas_sphere)/sum(face_areas_sphere));
 face_areas_sphere = face_areas_sphere/sum(face_areas_sphere)*sum(face_areas_brain);
-% surfplot( g_sphere, face_areas_sphere )
+vertex_areas_sphere = vertex_areas_sphere/sum(vertex_areas_sphere)*sum(vertex_areas_brain);
+
+% srfplot( g_sphere, face_areas_sphere )
 % spherescreen(1)
 
 %%
+subplot(1,2,1)
 face_area_ratio = face_areas_sphere./face_areas_brain;
-surfplot( g_white, face_area_ratio, 0)
+srfplot( g_white, face_area_ratio, 0)
 caxis([0.5,2])
-fullscreen
-colorbar
+fullscreen;
+% colorbar
 colormap('jet')
-
+title('Face Areas')
+subplot(1,2,2)
+vertex_area_ratio = vertex_areas_sphere./vertex_areas_brain;
+srfplot( g_white, vertex_area_ratio )
+caxis([0.5,2])
+fullscreen;
+% colorbar
+colormap('jet')
+title('Vertex Areas')
 %% Area ratio on the brain -saving
 for dosqrt = [0,1]
     if dosqrt == 0
@@ -36,27 +58,28 @@ for dosqrt = [0,1]
     else
         face_area_ratio = sqrt(face_areas_sphere)./sqrt(face_areas_brain);
     end
-    surfplot( g_white, face_area_ratio, 0)
+    srfplot( g_white, face_area_ratio, 0)
     caxis([0.5,2])
+    axis image
     fullscreen
     colorbar
     colormap('jet')
     if dosqrt == 0 
         title('Sphere area/Cortex Area')
-        saveim('bertface_nosqrt_surf_face_area', './')
+        saveim('face_nosqrt_srf_face_area', './')
     else
         title('sqrt(Sphere area)/Sqrt(Cortex Area)')
-        saveim('bertface_sqrt_surf_face_area', './')
+        saveim('face_sqrt_srf_face_area', './')
     end
 end
-% saveim('bertface_surf_face_area', './')
-
+% saveim('bertface_srf_face_area', './')
 
 %% Calculation using srf2area
-addpath(genpath('C:\Users\12SDa\davenpor\davenpor\Other_Toolboxes\areal\'))
+% addpath(genpath('C:\Users\12SDa\davenpor\davenpor\Other_Toolboxes\areal\'))
 [s, vertexarea_white] = srf2area('C:\Users\12SDa\davenpor\Data\Surface\lh.white.srf', 'dpf');
 [facearea_sphere, vertexarea_sphere] = srf2area('C:\Users\12SDa\davenpor\Data\Surface\lh.sphere.reg.srf', 'dpf');
 facearea_sphere = facearea_sphere/sum(facearea_sphere)*sum(facearea_white);
+
 %%
 for dosqrt = [0,1]
     if dosqrt == 0
@@ -64,17 +87,17 @@ for dosqrt = [0,1]
     else
         dpf_face_area_ratio = sqrt(facearea_sphere)./sqrt(facearea_white);
     end
-    surfplot( g_white, dpf_face_area_ratio, 0)
+    srfplot( g_white, dpf_face_area_ratio, 0)
     caxis([0.5,2])
     fullscreen
     colorbar
     colormap('jet')
     if dosqrt == 0 
         title('Sphere area/Cortex Area')
-        saveim('bertface_nosqrt_dpf', './')
+        saveim('face_nosqrt_dpf', './')
     else
         title('sqrt(Sphere area)/Sqrt(Cortex Area)')
-        saveim('bertface_sqrt_dpf', './')
+        saveim('face_sqrt_dpf', './')
     end
 end
 
@@ -117,7 +140,7 @@ end
 face_area_ratio = face_areas_sphere./face_areas_brain;
 figure
 % face_area_ratio = facearea_sphere./facearea_white;
-surfplot( g_white, face_area_ratio, 0)
+srfplot( g_white, face_area_ratio, 0)
 caxis([0.5,2])
 surfscreen
 colorbar

@@ -1,38 +1,34 @@
-filename = 'C:\Users\12SDa\davenpor\Data\Oasis\oasis_cs_freesurfer_disc1\disc1\OAS1_0001_MR1\surf\lh.white';
-surfplot(filename)
+global dataloc
+filename = [dataloc, 'Surface/Oasis_data/oasis_data_raw/disc1_freesurfer/OAS1_0001_MR1/surf/lh.white'];
+srf = fs2surf(filename);
+srfplot(srf)
 
 %%
-surfplot(filename, randn(204140,1))
+srfplot(srf, randn(102072,1), 0)
 
 %%
-[vertices, faces] = freesurfer_read_surf(filename);
-clear surf
-surf.vertices = vertices;
-surf.faces = faces;
-
-%%
-oasis_left = 'C:\Users\12SDa\davenpor\Data\Oasis\oasis_cs_freesurfer_disc1\disc1\OAS1_0001_MR1\surf\lh.white';
-oasis_right = 'C:\Users\12SDa\davenpor\Data\Oasis\oasis_cs_freesurfer_disc1\disc1\OAS1_0001_MR1\surf\rh.white';
+oasis_left = [dataloc, 'Surface/Oasis_data/oasis_data_raw/disc1_freesurfer/OAS1_0001_MR1/surf/lh.white'];
+oasis_right = [dataloc, 'Surface/Oasis_data/oasis_data_raw/disc1_freesurfer/OAS1_0001_MR1/surf/rh.white'];
 
 srf = fs2surf(oasis_left, oasis_right);
-surfplot(srf.lh)
+srfplot(srf.lh)
 
-%%
-oasis_left = 'C:\Users\12SDa\davenpor\Data\Oasis\oasis_cs_freesurfer_disc1\disc1\OAS1_0001_MR1\surf\lh.sphere';
-oasis_right = 'C:\Users\12SDa\davenpor\Data\Oasis\oasis_cs_freesurfer_disc1\disc1\OAS1_0001_MR1\surf\rh.sphere';
+%% Sphere
+oasis_left = [dataloc, 'Surface/Oasis_data/oasis_data_raw/disc1_freesurfer/OAS1_0001_MR1/surf/lh.sphere'];
+oasis_right = [dataloc, 'Surface/Oasis_data/oasis_data_raw/disc1_freesurfer/OAS1_0001_MR1/surf/rh.sphere'];
 
 srfsphere = fs2surf(oasis_left, oasis_right);
-surfplot(srfsphere.lh)
+srfplot(srfsphere.lh)
 
 %% Registered data
-oasis_left_reg = 'C:\Users\12SDa\davenpor\Data\Oasis\oasis_cs_freesurfer_disc1\disc1\OAS1_0001_MR1\surf\lh.sphere.reg';
-oasis_right_reg = 'C:\Users\12SDa\davenpor\Data\Oasis\oasis_cs_freesurfer_disc1\disc1\OAS1_0001_MR1\surf\rh.sphere.reg';
+oasis_left_reg = [dataloc, 'Surface/Oasis_data/oasis_data_raw/disc1_freesurfer/OAS1_0001_MR1/surf/lh.sphere.reg'];
+oasis_right_reg = [dataloc, 'Surface/Oasis_data/oasis_data_raw/disc1_freesurfer/OAS1_0001_MR1/surf/rh.sphere.reg'];
 
 srfsphere_reg = fs2surf(oasis_left_reg, oasis_right_reg);
-surfplot(srfsphere_reg.lh)
+srfplot(srfsphere_reg.lh)
 
 %%
-filename = 'C:\Users\12SDa\davenpor\Data\Oasis\oasis_cs_freesurfer_disc1\disc1\OAS1_0001_MR1\surf\lh.white';
+filename = [dataloc, 'Surface/Oasis_data/oasis_data_raw/disc1_freesurfer/OAS1_0001_MR1/surf/lh.white'];
 tic
 [vertices, faces] = read_fs_geometry(filename);
 clear surf
